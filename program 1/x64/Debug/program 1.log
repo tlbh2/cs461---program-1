@@ -1,0 +1,4 @@
+﻿  Source.cpp
+\\kc.umkc.edu\kc-users\home\t\tlbh2\Documents\GitHub\cs461---program-1\program 1\Source.cpp(101,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+\\kc.umkc.edu\kc-users\home\t\tlbh2\Documents\GitHub\cs461---program-1\program 1\Source.cpp(40): warning C4715: 'GetIndex': not all control paths return a value
+  program 1.vcxproj -> \\kc.umkc.edu\kc-users\home\t\tlbh2\Documents\GitHub\cs461---program-1\x64\Debug\program 1.exe

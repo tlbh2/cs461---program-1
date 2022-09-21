@@ -7,7 +7,7 @@
 #include <sstream>
 using namespace std;
 
-int vertArr[47][47]; //the adjacency matrix initially 0
+int vertArr[30][30]; //the adjacency matrix initially 0
 
 void displayMatrix(int v) {
     int i, j;
@@ -37,7 +37,6 @@ int GetIndex(set<string> S, string K)
     }
 
     // If K is not present in the set
-    return -1;
 }
 
 int main() {
@@ -66,14 +65,16 @@ int main() {
     else cout << "There is no such file exists\n";
 
     //output set
+    int count = 0;
     for (set<string>::iterator itr = out.begin(); itr != out.end(); itr++) {
-        cout << *itr << " ";
+        cout << count << "-" << * itr << endl;
+        count++;
     }
-    cout << endl;
+    cout << out.size() << endl;
     cout << "=---------------------------=" << endl;
 
     //Adjacency matrix
-
+    
     ifstream mySecondfile("Adjacencies.txt");
     if (mySecondfile.good())
     {
@@ -84,7 +85,7 @@ int main() {
             //split string into substring using delimiter 
             while (getline(X, substrings, delim))
             {
-                if (substrings == " ") {
+                if (substrings == " " or substrings == "") {
                     continue;
                 }
                 else {
@@ -98,7 +99,7 @@ int main() {
     }
 
     displayMatrix(out.size());
-
+    
     return 0;
 }
 
