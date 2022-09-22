@@ -5,9 +5,19 @@
 #include <list>
 #include <set>
 #include <sstream>
+#include <map>
 using namespace std;
 
-int vertArr[30][30]; //the adjacency matrix initially 0
+int vertArr[46][46]; //the adjacency matrix initially 0
+
+struct XYcoordinates
+{
+    XYcoordinates() :  x(0.0), y(0.0) {}
+    XYcoordinates( float newX, float newY)
+       : x(newX), y(newY) {}
+
+    float x, y;
+};
 
 void displayMatrix(int v) {
     int i, j;
@@ -37,14 +47,17 @@ int GetIndex(set<string> S, string K)
     }
 
     // If K is not present in the set
+    return 0;
 }
 
 int main() {
 
-    string line, substrings, firstWord;
+    string line, substrings, firstWord, townName;
     int uu = 0, vv = 0;
+    float X = 0.0, Y= 0.0 ;
     const char delim = ' ';
     set<string> out; //use set to store non-duplicate values == unique values
+    map<string, XYcoordinates> townCoordinates;
 
     ifstream myfile("Adjacencies.txt");
     if (myfile.good())  
@@ -99,6 +112,29 @@ int main() {
     }
 
     displayMatrix(out.size());
+
+    //read file coordinates.txt and store value to map for easy access
+    ifstream coordinatesFile("coordinates.txt");
+    if (coordinatesFile.good())
+    {
+        while (coordinatesFile >> townName >> X >> Y)
+        {
+            XYcoordinates tempObject(X,Y);
+            townCoordinates.insert(pair<string, XYcoordinates>(townName, tempObject));
+        }
+        coordinatesFile.close();
+    }
+
+    //print out coordinates map
+    map<string, XYcoordinates>::iterator itr;
+    cout << "\nThe map gquiz1 is : \n";
+    cout << "\tKEY\tELEMENT\n";
+    for (itr = townCoordinates.begin(); itr != townCoordinates.end(); ++itr) {
+        cout << '\t' << itr->first << '\t' << itr->second.x << '\t' << itr->second.y
+            << '\n';
+    }
+    cout << endl;
+
     
     return 0;
 }
