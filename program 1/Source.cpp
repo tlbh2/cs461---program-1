@@ -247,6 +247,7 @@ int main() {
     double tempVal = 0.0; 
     bool TFvalue = false;
     string targetName, tempName;
+    list<string> originTodestination;
     startNodeIndex = GetIndex(out, startNode);
     for (i = 0; i < out.size(); i++) {
         if (vertArr[i][startNodeIndex] == 1)
@@ -302,6 +303,7 @@ int main() {
                     {
                         cout << endl;
                         cout << "The route is " << endNode << " -> ";
+                        originTodestination.push_back(endNode);
                         while (endNode != startNode) {
                             int nodeIndex = GetIndex(out, endNode);
                             for (int i = 0; i < out.size(); i++) {
@@ -311,10 +313,16 @@ int main() {
                                     if (explored.find(tempName) != explored.end())
                                     {
                                         cout << tempName;
+                                        originTodestination.push_back(tempName);
                                         explored.erase(tempName);
                                         endNode = tempName;
                                         if (endNode == startNode)
                                         {
+                                            //originTodestination.push_back(startNode);
+                                            cout << endl;
+                                            cout << "Route from origin to destination" << endl;
+                                            for (auto it = originTodestination.rbegin(); it != originTodestination.rend(); ++it)
+                                                cout << *it << " -> ";
                                             return 0;
                                         }
                                         cout << " -> ";
@@ -340,8 +348,7 @@ int main() {
             }
         }
     }
-    
-
+   
     
     return 0;
 }
