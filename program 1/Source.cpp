@@ -113,13 +113,8 @@ int tracing(set<string>& exploredSet, string goal, set<string> out, string start
 
 int main() {
 
-
-    //simulated starting point
-    string startNode = "El_Dorado";
-    double startNode_X = 37.8098997, startNode_Y = -96.8943313;
-    //simulated goal state
-    string endNode = "Mayfield";
-
+    string startNode = "El_Dorado", endNode = "Mayfield";
+    double startNode_X = 0.0, startNode_Y = 0.0;
 
     //min-heap for the priority queue
     priority_queue<double, vector<double>, greater<double>> minPQcost;
@@ -152,14 +147,51 @@ int main() {
         coordinatesFile.close();
     }
 
+    //get input from user
+    cout << "Enter starting town " << endl;
+    while (cin >> startNode)
+    {
+        if (out.find(startNode) != out.end()) {
+            break;
+        }
+        else {
+            cout << "Invalid town. Please try again!!!" << std::endl;
+        }
+    }
+    cout << "Enter ending town " << endl;
+    while (cin >> endNode)
+    {
+        if (out.find(endNode) != out.end()) {
+            break;
+        }
+        else {
+            cout << "Invalid town. Please try again!!!" << std::endl;
+        }
+    }
+
+    ifstream initial("coordinates.txt");
+    if (initial.good())
+    {
+        while (initial >> townName >> X >> Y)
+        {
+            if (townName == startNode)
+            {
+                startNode_X = X;
+                startNode_Y = Y;
+            }
+        }
+        initial.close();
+    }
+
     //output set
-    
+    /*
     int count = 1;
     for (set<string>::iterator itr = out.begin(); itr != out.end(); itr++) {
         cout << count << "-" << * itr << endl;
         count++;
     }
     cout << "Total = " << out.size() << endl;
+    */
     cout << "=---------------------------=" << endl;
     
 
